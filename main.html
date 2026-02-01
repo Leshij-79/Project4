@@ -1,166 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Главная</title>
-        <link rel="stylesheet" href="static/css/bootstrap.css">
-    </head>
-    <body>
-    <div class="container-fluid h-100">
-        <div class="row h-100">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин | Главная</title>
+    <!-- Подключение Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Иконки Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-            <div class="col-md-3 col-lg-2 position-sticky top-0 h-100">
-                <div class="bg-black h-100 p-3 overflow-auto">
+        /* Фиксированная левая панель */
+        #sidebar {
+            background-color: #000;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Прокручиваемая правая часть */
+        #main-content {
+            margin-left: 280px;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                margin-bottom: 0;
+            }
+
+            #main-content {
+                margin-left: 0;
+                height: auto;
+                overflow-y: visible;
+            }
+        }
+
+        /* Стили для товаров */
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-header {
+            background-color: #f1f3f4;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .product-body {
+            padding: 20px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #198754;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .feature-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list i {
+            color: #198754;
+            margin-right: 10px;
+        }
+
+        .btn-custom {
+            background-color: #198754;
+            color: white;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #146c43;
+            color: white;
+        }
+
+        /* Стили для боковой панели */
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #198754;
+        }
+
+        .nav-item {
+            margin-bottom: 10px;
+        }
+
+        .nav-link {
+            color: #ddd;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: #333;
+            color: white;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+
+        /* Заголовок страницы */
+        .page-title {
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #198754;
+        }
+
+        hr.custom-hr {
+            border-top: 2px solid #ddd;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Левая панель (фиксированная) -->
+    <div id="sidebar" class="d-flex flex-column">
+        <div class="logo">
+            <i class="bi bi-shop"></i> МАГАЗИН
+        </div>
+
+        <nav class="nav flex-column">
+            <a class="nav-link active" href="#">
+                <i class="bi bi-house-door"></i> Главная
+            </a>
+            <a class="nav-link" href="#">
+                <i class="bi bi-grid"></i> Категории
+            </a>
+            <a class="nav-link" href="#">
+                <i class="bi bi-cart"></i> Заказы
+            </a>
+            <a class="nav-link" href="#">
+                <i class="bi bi-person"></i> Контакты
+            </a>
+        </nav>
+        <div class="dropdown position-absolute bottom-0 start-0 mb-3 ms-3">
+            <hr class="custom-hr">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Пользователь
+            </button>
+            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">Профиль</a></li>
+                <li><a class="dropdown-item" href="#">Выход</a></li>
+            </ul>
+        </div>
+    </div>
+     <div id="main-content">
+        <div class="container-fluid">
+            <h1 class="page-title">Главная</h1>
+            <p class="lead mb-4">Вы находитесь на сайте, предназначенном для продажи товаров.</p>
 
 
 
-                        <div class="row">
-                            <h4>
-                                Меню
-                            </h4>
-                        </div>
-                        <div class="row">
-                            <h6>
-                                Главная
-                            </h6>
-                        </div>
-                        <div class="row">
-                            <h6>
-                                Категории
-                            </h6>
-                        </div>
-                        <div class="row">
-                            <h6>
-                                Заказы
-                            </h6>
-                        </div>
-                        <div class="row">
-                            <h6>
-                                Контакты
-                            </h6>
-                        </div>
-                        <div class="row">
-                            <div class="dropdown position-absolute bottom-0 start-0 mb-3 ms-3">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Пользователь
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Профиль</a></li>
-                                    <li><a class="dropdown-item" href="#">Выход</a></li>
-                                </ul>
-                            </div>
-                        </div>
 
-
-
+            <div class="col-4 card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$ 140</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- Неограниченная лицензия</li>
+                        <li>- Поддержка</li>
+                        <li>- Установка на сервер</li>
+                        <li>- Получение обновлений</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
                 </div>
             </div>
-
-
-            <div class="col-md-9 col-lg-10">
-                <div class="p-4 h-100 overflow-auto">
-                    <div class="row">
-                        col-9 text-center
-                    </div>
-                    <div class="row">
-                        <div class="col-4 card mb-4 box-shadow">
-                            <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$ 140</h1>
-                                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                    <li>- Неограниченная лицензия</li>
-                                    <li>- Поддержка</li>
-                                    <li>- Установка на сервер</li>
-                                    <li>- Получение обновлений</li>
-                                </ul>
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                            </div>
-                        </div>
-                        <div class="col-4 card mb-4 box-shadow">
-                            <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$ 140</h1>
-                                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                    <li>- Неограниченная лицензия</li>
-                                    <li>- Поддержка</li>
-                                    <li>- Установка на сервер</li>
-                                    <li>- Получение обновлений</li>
-                                </ul>
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                            </div>
-                        </div>
-                        <div class="col-4 card mb-4 box-shadow">
-                            <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$ 140</h1>
-                                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                    <li>- Неограниченная лицензия</li>
-                                    <li>- Поддержка</li>
-                                    <li>- Установка на сервер</li>
-                                    <li>- Получение обновлений</li>
-                                </ul>
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4 card mb-4 box-shadow">
-                            <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$ 140</h1>
-                                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                    <li>- Неограниченная лицензия</li>
-                                    <li>- Поддержка</li>
-                                    <li>- Установка на сервер</li>
-                                    <li>- Получение обновлений</li>
-                                </ul>
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                            </div>
-                        </div>
-                        <div class="col-4 card mb-4 box-shadow">
-                            <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$ 140</h1>
-                                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                    <li>- Неограниченная лицензия</li>
-                                    <li>- Поддержка</li>
-                                    <li>- Установка на сервер</li>
-                                    <li>- Получение обновлений</li>
-                                </ul>
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                            </div>
-                        </div>
-                        <div class="col-4 card mb-4 box-shadow">
-                            <div class="card-header">
-                                <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
-                            </div>
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">$ 140</h1>
-                                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                    <li>- Неограниченная лицензия</li>
-                                    <li>- Поддержка</li>
-                                    <li>- Установка на сервер</li>
-                                    <li>- Получение обновлений</li>
-                                </ul>
-                                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-4 card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$ 140</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- Неограниченная лицензия</li>
+                        <li>- Поддержка</li>
+                        <li>- Установка на сервер</li>
+                        <li>- Получение обновлений</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                </div>
+            </div>
+            <div class="col-4 card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$ 140</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- Неограниченная лицензия</li>
+                        <li>- Поддержка</li>
+                        <li>- Установка на сервер</li>
+                        <li>- Получение обновлений</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-4 card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$ 140</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- Неограниченная лицензия</li>
+                        <li>- Поддержка</li>
+                        <li>- Установка на сервер</li>
+                        <li>- Получение обновлений</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                </div>
+            </div>
+            <div class="col-4 card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$ 140</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- Неограниченная лицензия</li>
+                        <li>- Поддержка</li>
+                        <li>- Установка на сервер</li>
+                        <li>- Получение обновлений</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                </div>
+            </div>
+            <div class="col-4 card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Удобный сервис рассылок</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$ 140</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- Неограниченная лицензия</li>
+                        <li>- Поддержка</li>
+                        <li>- Установка на сервер</li>
+                        <li>- Получение обновлений</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
     </div>
+
     <script src="static/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
