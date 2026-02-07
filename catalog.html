@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интернет-магазин | Заказы</title>
-    <!-- Подключение Bootstrap 5 CSS -->
     <link href="./static/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Иконки Bootstrap -->
     <link rel="stylesheet" href="./static/font/bootstrap-icons.css">
     <style>
         body {
             overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        /* Фиксированная левая панель */
         #sidebar {
             background-color: #000;
             color: #fff;
@@ -27,8 +23,6 @@
             overflow-y: auto;
             box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
         }
-
-        /* Прокручиваемая правая часть */
         #main-content {
             margin-left: 280px;
             height: 100vh;
@@ -36,8 +30,6 @@
             padding: 20px;
             background-color: #f8f9fa;
         }
-
-        /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             #sidebar {
                 width: 100%;
@@ -52,8 +44,6 @@
                 overflow-y: visible;
             }
         }
-
-        /* Стили для товаров */
         .catalog-card {
             background-color: white;
             border-radius: 10px;
@@ -75,17 +65,6 @@
             padding: 20px;
         }
 
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #198754;
-        }
-
-        .feature-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
         .feature-list li {
             padding: 5px 0;
             border-bottom: 1px solid #f0f0f0;
@@ -99,32 +78,11 @@
             color: #198754;
             margin-right: 10px;
         }
-
-        .btn-custom {
-            background-color: #198754;
-            color: white;
-            padding: 12px 30px;
-            font-weight: bold;
-            border-radius: 8px;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .btn-custom:hover {
-            background-color: #146c43;
-            color: white;
-        }
-
-        /* Стили для боковой панели */
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
             margin-bottom: 30px;
             color: #198754;
-        }
-
-        .nav-item {
-            margin-bottom: 10px;
         }
 
         .nav-link {
@@ -138,19 +96,6 @@
             background-color: #333;
             color: white;
         }
-
-        .sidebar-footer {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            color: #aaa;
-            font-size: 0.9rem;
-            border-top: 1px solid #333;
-            padding-top: 15px;
-        }
-
-        /* Заголовок страницы */
         .page-title {
             color: #333;
             margin-bottom: 30px;
@@ -165,7 +110,6 @@
     </style>
 </head>
 <body>
-    <!-- Левая панель (фиксированная) -->
     <div id="sidebar" class="d-flex flex-column">
         <div class="logo">
             <i class="bi bi-shop"></i> МАГАЗИН
